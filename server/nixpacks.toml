@@ -1,0 +1,5 @@
+[phases.build]
+cmds = ["echo 'No build needed'"]
+
+[phases.start]
+cmd = "node server.js"
