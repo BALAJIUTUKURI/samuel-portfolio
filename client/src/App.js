@@ -15,6 +15,8 @@ import Contact from './components/Contact';
 import Analytics from './components/Analytics';
 import Preloader from './components/Preloader';
 import SEOHead from './components/SEOHead';
+import ThemeToggle from './components/ThemeToggle';
+import PWAInstall from './components/PWAInstall';
 import Footer from './components/Footer';
 import BackToTop from './components/BackToTop';
 import WhatsAppFloat from './components/WhatsAppFloat';
@@ -48,6 +50,8 @@ function App() {
             <Footer />
             <BackToTop />
             <WhatsAppFloat />
+            <ThemeToggle />
+            <PWAInstall />
           </Preloader>
         } />
         

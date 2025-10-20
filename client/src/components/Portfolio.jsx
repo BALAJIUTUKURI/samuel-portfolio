@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { projectsAPI } from '../utils/api';
+import ImageOptimizer from './ImageOptimizer';
+import SearchBar from './SearchBar';
 
 const Portfolio = () => {
   const [projects, setProjects] = useState([]);
@@ -70,6 +72,21 @@ const Portfolio = () => {
             Explore my creative work across various design disciplines
           </p>
         </motion.div>
+
+        {/* Search Bar */}
+        <div className="flex justify-center mb-8">
+          <SearchBar onSearch={(query) => {
+            if (query) {
+              setFilteredProjects(projects.filter(p => 
+                p.title.toLowerCase().includes(query.toLowerCase()) ||
+                p.description.toLowerCase().includes(query.toLowerCase()) ||
+                p.category.toLowerCase().includes(query.toLowerCase())
+              ));
+            } else {
+              filterProjects(activeCategory);
+            }
+          }} />
+        </div>
 
         {/* Category Filter */}
         <div className="flex flex-wrap justify-center gap-4 mb-12">
