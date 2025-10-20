@@ -3,7 +3,7 @@ const allowedOrigins = [
   'http://localhost:3001',
   'https://samuelpaul.com',
   'https://www.samuelpaul.com',
-  'https://your-vercel-app.vercel.app'
+  'https://samuel-portfolio-chi.vercel.app'
 ];
 
 const corsOptions = {
