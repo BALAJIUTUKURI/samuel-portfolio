@@ -4,8 +4,8 @@ const Analytics = () => {
   useEffect(() => {
     // Track page views
     const trackPageView = () => {
-      if (typeof gtag !== 'undefined') {
-        gtag('config', 'GA_MEASUREMENT_ID', {
+      if (typeof window.gtag !== 'undefined') {
+        window.gtag('config', 'GA_MEASUREMENT_ID', {
           page_path: window.location.pathname,
         });
       }
@@ -43,8 +43,8 @@ const Analytics = () => {
       );
       if (scrollPercent > maxScroll) {
         maxScroll = scrollPercent;
-        if (maxScroll % 25 === 0 && typeof gtag !== 'undefined') {
-          gtag('event', 'scroll', {
+        if (maxScroll % 25 === 0 && typeof window.gtag !== 'undefined') {
+          window.gtag('event', 'scroll', {
             event_category: 'engagement',
             event_label: `${maxScroll}%`,
             value: maxScroll
