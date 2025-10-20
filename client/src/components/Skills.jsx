@@ -13,7 +13,7 @@ const Skills = () => {
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-white dark:bg-gray-800">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -22,8 +22,8 @@ const Skills = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">Skills</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold text-primary dark:text-white mb-6">Skills</h2>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             Proficiency in industry-standard design tools and software
           </p>
         </motion.div>
@@ -39,10 +39,10 @@ const Skills = () => {
               viewport={{ once: true }}
             >
               <div className="flex justify-between items-center mb-2">
-                <h3 className="text-lg font-semibold text-primary">{skill.name}</h3>
+                <h3 className="text-lg font-semibold text-primary dark:text-white">{skill.name}</h3>
                 <span className="text-accent font-medium">{skill.level}%</span>
               </div>
-              <div className="w-full bg-gray-200 rounded-full h-3">
+              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
                 <motion.div
                   className="bg-accent h-3 rounded-full"
                   initial={{ width: 0 }}

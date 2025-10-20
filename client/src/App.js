@@ -17,6 +17,8 @@ import Preloader from './components/Preloader';
 import SEOHead from './components/SEOHead';
 import ThemeToggle from './components/ThemeToggle';
 import PWAInstall from './components/PWAInstall';
+import OfflineIndicator from './components/OfflineIndicator';
+import CookieConsent from './components/CookieConsent';
 import Footer from './components/Footer';
 import WhatsAppFloat from './components/WhatsAppFloat';
 import AdminLogin from './pages/AdminLogin';
@@ -50,6 +52,8 @@ function App() {
             <WhatsAppFloat />
             <ThemeToggle />
             <PWAInstall />
+            <OfflineIndicator />
+            <CookieConsent />
           </Preloader>
         } />
         

@@ -15,8 +15,8 @@ const AdminLogin = () => {
     setError('');
 
     try {
-      const response = await adminAPI.login({ email });
-      if (response.data.success) {
+      const response = await adminAPI.sendOTP({ email });
+      if (response.data.message) {
         navigate('/admin/verify-otp', { state: { email } });
       }
     } catch (error) {

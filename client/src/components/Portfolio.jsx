@@ -58,7 +58,7 @@ const Portfolio = () => {
   }
 
   return (
-    <section id="portfolio" className="py-20">
+    <section id="portfolio" className="py-20 bg-white dark:bg-gray-900">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -67,8 +67,8 @@ const Portfolio = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">Portfolio</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold text-primary dark:text-white mb-6">Portfolio</h2>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             Explore my creative work across various design disciplines
           </p>
         </motion.div>
@@ -121,7 +121,7 @@ const Portfolio = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.8 }}
                 transition={{ duration: 0.5 }}
-                className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer"
+                className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden cursor-pointer"
                 whileHover={{ y: -10 }}
                 onClick={() => openLightbox(project)}
               >
@@ -142,8 +142,8 @@ const Portfolio = () => {
                   )}
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-primary mb-2">{project.title}</h3>
-                  <p className="text-gray-600 mb-4">{project.description}</p>
+                  <h3 className="text-xl font-bold text-primary dark:text-white mb-2">{project.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">{project.description}</p>
                   <span className="inline-block bg-accent/10 text-accent px-3 py-1 rounded-full text-sm">
                     {project.category}
                   </span>
@@ -170,7 +170,7 @@ const Portfolio = () => {
               onClick={closeLightbox}
             >
               <motion.div
-                className="bg-white rounded-lg max-w-4xl max-h-[90vh] overflow-auto"
+                className="bg-white dark:bg-gray-800 rounded-lg max-w-4xl max-h-[90vh] overflow-auto"
                 initial={{ scale: 0.8 }}
                 animate={{ scale: 1 }}
                 exit={{ scale: 0.8 }}
@@ -178,7 +178,7 @@ const Portfolio = () => {
               >
                 <div className="p-6">
                   <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-2xl font-bold text-primary">{selectedProject.title}</h3>
+                    <h3 className="text-2xl font-bold text-primary dark:text-white">{selectedProject.title}</h3>
                     <button
                       onClick={closeLightbox}
                       className="text-gray-500 hover:text-gray-700 text-2xl"
@@ -205,7 +205,7 @@ const Portfolio = () => {
                     )}
                   </div>
                   
-                  <p className="text-gray-600 mb-4">{selectedProject.description}</p>
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">{selectedProject.description}</p>
                   <span className="inline-block bg-accent/10 text-accent px-3 py-1 rounded-full text-sm">
                     {selectedProject.category}
                   </span>
