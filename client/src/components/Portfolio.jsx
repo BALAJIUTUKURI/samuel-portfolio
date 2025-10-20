@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { projectsAPI } from '../utils/api';
-import ImageOptimizer from './ImageOptimizer';
 import SearchBar from './SearchBar';
 
 const Portfolio = () => {

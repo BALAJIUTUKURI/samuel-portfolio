@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { adminAPI } from '../utils/api';
 
 const About = () => {
-  const [adminProfile, setAdminProfile] = useState(null);
+  const [, setAdminProfile] = useState(null);
   const [profileImage, setProfileImage] = useState(null);
   const [resumeUrl, setResumeUrl] = useState(null);
 
