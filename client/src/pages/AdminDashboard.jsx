@@ -248,10 +248,24 @@ const AdminDashboard = () => {
                   <input
                     type="file"
                     accept={formData.mediaType === 'video' ? 'video/*' : 'image/*'}
-                    onChange={(e) => setMediaFile(e.target.files[0])}
+                    onChange={(e) => {
+                      const file = e.target.files[0];
+                      if (file) {
+                        const maxSize = formData.mediaType === 'video' ? 500 * 1024 * 1024 : 50 * 1024 * 1024;
+                        if (file.size > maxSize) {
+                          alert(`File too large. Max size: ${formData.mediaType === 'video' ? '500MB' : '50MB'}`);
+                          e.target.value = '';
+                          return;
+                        }
+                        setMediaFile(file);
+                      }
+                    }}
                     required
                     className="w-full px-3 py-2 border rounded-lg"
                   />
+                  <p className="text-xs text-gray-500 mt-1">
+                    Max size: {formData.mediaType === 'video' ? '500MB' : '50MB'}
+                  </p>
                 </div>
 
                 {formData.mediaType === 'video' && (

@@ -43,8 +43,8 @@ app.use(cors({
     : ['http://localhost:3000', 'http://192.168.31.15:3000'],
   credentials: true
 }));
-app.use(express.json({ limit: '100mb' }));
-app.use(express.urlencoded({ limit: '100mb', extended: true }));
+app.use(express.json({ limit: '500mb' }));
+app.use(express.urlencoded({ limit: '500mb', extended: true }));
 app.use(sanitizeInput);
 
 // Static file serving with proper headers
