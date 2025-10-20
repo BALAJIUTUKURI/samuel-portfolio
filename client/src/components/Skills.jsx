@@ -28,28 +28,67 @@ const Skills = () => {
           </p>
         </motion.div>
 
-        <div className="max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {skills.map((skill, index) => (
             <motion.div
               key={skill.name}
-              className="mb-8"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
+              whileHover={{ y: -5, scale: 1.02 }}
             >
-              <div className="flex justify-between items-center mb-2">
-                <h3 className="text-lg font-semibold text-primary dark:text-white">{skill.name}</h3>
-                <span className="text-accent font-medium">{skill.level}%</span>
-              </div>
-              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
-                <motion.div
-                  className="bg-accent h-3 rounded-full"
-                  initial={{ width: 0 }}
-                  whileInView={{ width: `${skill.level}%` }}
-                  transition={{ duration: 1, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                />
+              <div className="text-center">
+                <div className="relative w-24 h-24 mx-auto mb-4">
+                  <svg className="w-24 h-24 transform -rotate-90" viewBox="0 0 100 100">
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r="40"
+                      stroke="currentColor"
+                      strokeWidth="8"
+                      fill="transparent"
+                      className="text-gray-200 dark:text-gray-700"
+                    />
+                    <motion.circle
+                      cx="50"
+                      cy="50"
+                      r="40"
+                      stroke="currentColor"
+                      strokeWidth="8"
+                      fill="transparent"
+                      strokeLinecap="round"
+                      className="text-accent"
+                      initial={{ strokeDasharray: "0 251.2" }}
+                      whileInView={{ strokeDasharray: `${(skill.level / 100) * 251.2} 251.2` }}
+                      transition={{ duration: 1.5, delay: index * 0.1 }}
+                      viewport={{ once: true }}
+                    />
+                  </svg>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-2xl font-bold text-accent group-hover:scale-110 transition-transform">
+                      {skill.level}%
+                    </span>
+                  </div>
+                </div>
+                <h3 className="text-lg font-semibold text-primary dark:text-white mb-2 group-hover:text-accent transition-colors">
+                  {skill.name}
+                </h3>
+                <div className="flex justify-center">
+                  {[...Array(5)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className={`w-2 h-2 rounded-full mx-1 ${
+                        i < Math.round(skill.level / 20) ? 'bg-accent' : 'bg-gray-300 dark:bg-gray-600'
+                      }`}
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      transition={{ duration: 0.3, delay: index * 0.1 + i * 0.1 }}
+                      viewport={{ once: true }}
+                    />
+                  ))}
+                </div>
               </div>
             </motion.div>
           ))}
