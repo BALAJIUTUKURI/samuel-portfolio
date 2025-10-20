@@ -38,8 +38,8 @@ app.use(requestLogger);
 app.use(cacheControl);
 app.use(generalLimiter);
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? ['https://your-netlify-site.netlify.app', 'https://your-custom-domain.com']
+  origin: process.env.NODE_ENV === 'production'
+    ? process.env.CORS_ORIGIN?.split(',') || ['https://samuel-paul-portfolio.netlify.app']
     : ['http://localhost:3000', 'http://192.168.31.15:3000'],
   credentials: true
 }));
@@ -67,8 +67,8 @@ app.get('/test-upload', (req, res) => {
   const fs = require('fs');
   const uploadsPath = path.join(__dirname, 'uploads');
   const files = fs.readdirSync(uploadsPath).filter(f => f !== '.gitkeep');
-  res.json({ 
-    message: 'Static files test', 
+  res.json({
+    message: 'Static files test',
     files,
     sampleUrl: files.length > 0 ? `/uploads/${files[0]}` : null
   });

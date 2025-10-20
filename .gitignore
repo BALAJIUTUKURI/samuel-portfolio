@@ -1,22 +1,26 @@
 # Dependencies
 node_modules/
-*/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Production builds
+client/build/
+server/dist/
 
 # Environment variables
 .env
-*/.env
+.env.local
+.env.production
+.env.development
 
-# Build outputs
-client/build/
-client/dist/
+# Logs
+logs/
+*.log
 
 # Uploads (keep structure but ignore files)
 server/uploads/*
 !server/uploads/.gitkeep
-
-# Logs
-*.log
-logs/
 
 # OS generated files
 .DS_Store
@@ -27,7 +31,7 @@ logs/
 ehthumbs.db
 Thumbs.db
 
-# IDE files
+# IDE
 .vscode/
 .idea/
 *.swp
