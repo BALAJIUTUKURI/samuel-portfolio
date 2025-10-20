@@ -4,7 +4,7 @@ import { FaInstagram, FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa
 
 const Hero = () => {
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-white pt-20">
+    <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 pt-20">
       <div className="container mx-auto px-4 text-center">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -12,7 +12,7 @@ const Hero = () => {
           transition={{ duration: 0.8 }}
         >
           <motion.h1 
-            className="text-5xl md:text-7xl font-bold text-primary mb-6"
+            className="text-5xl md:text-7xl font-bold text-primary dark:text-white mb-6"
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -21,7 +21,7 @@ const Hero = () => {
           </motion.h1>
           
           <motion.p 
-            className="text-xl md:text-2xl text-gray-600 mb-8"
+            className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -30,7 +30,7 @@ const Hero = () => {
           </motion.p>
           
           <motion.p 
-            className="text-lg text-gray-500 mb-12 max-w-2xl mx-auto"
+            className="text-lg text-gray-500 dark:text-gray-400 mb-12 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
@@ -45,15 +45,15 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            <div className="flex items-center gap-2 text-gray-600">
+            <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300">
               <FaPhone className="text-accent" />
               <span>+91 99122 26742</span>
             </div>
-            <div className="flex items-center gap-2 text-gray-600">
+            <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300">
               <FaEnvelope className="text-accent" />
               <span>kandulachandrapal@gmail.com</span>
             </div>
-            <div className="flex items-center gap-2 text-gray-600">
+            <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300">
               <FaMapMarkerAlt className="text-accent" />
               <span>Hyderabad, India</span>
             </div>

@@ -23,14 +23,14 @@ const Header = () => {
 
   return (
     <motion.header 
-      className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md shadow-sm"
+      className="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-sm"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <motion.div 
-          className="text-2xl font-bold text-primary"
+          className="text-2xl font-bold text-primary dark:text-white"
           whileHover={{ scale: 1.05 }}
         >
           Samuel Paul
@@ -42,7 +42,7 @@ const Header = () => {
             <motion.button
               key={item.name}
               onClick={() => scrollToSection(item.href)}
-              className="text-gray-700 hover:text-accent transition-colors duration-300"
+              className="text-gray-700 dark:text-gray-300 hover:text-accent transition-colors duration-300"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -62,7 +62,7 @@ const Header = () => {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <motion.div
-            className="absolute top-full left-0 right-0 bg-white shadow-lg md:hidden"
+            className="absolute top-full left-0 right-0 bg-white dark:bg-gray-800 shadow-lg md:hidden"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -72,7 +72,7 @@ const Header = () => {
                 <button
                   key={item.name}
                   onClick={() => scrollToSection(item.href)}
-                  className="px-4 py-2 text-left hover:bg-gray-100 transition-colors"
+                  className="px-4 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-300 transition-colors"
                 >
                   {item.name}
                 </button>

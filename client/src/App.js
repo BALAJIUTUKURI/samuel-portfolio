@@ -18,7 +18,6 @@ import SEOHead from './components/SEOHead';
 import ThemeToggle from './components/ThemeToggle';
 import PWAInstall from './components/PWAInstall';
 import Footer from './components/Footer';
-import BackToTop from './components/BackToTop';
 import WhatsAppFloat from './components/WhatsAppFloat';
 import AdminLogin from './pages/AdminLogin';
 import OTPVerification from './pages/OTPVerification';
@@ -48,7 +47,6 @@ function App() {
             <NewsletterSignup />
             <Contact />
             <Footer />
-            <BackToTop />
             <WhatsAppFloat />
             <ThemeToggle />
             <PWAInstall />

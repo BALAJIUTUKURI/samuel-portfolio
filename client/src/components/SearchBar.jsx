@@ -8,10 +8,6 @@ const SearchBar = ({ onSearch, placeholder = "Search projects..." }) => {
 
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.ctrlKey && e.key === 'k') {
-        e.preventDefault();
-        setIsOpen(true);
-      }
       if (e.key === 'Escape') {
         setIsOpen(false);
         setQuery('');
@@ -43,9 +39,6 @@ const SearchBar = ({ onSearch, placeholder = "Search projects..." }) => {
       >
         <FaSearch className="text-gray-500" />
         <span className="text-gray-500">Search...</span>
-        <kbd className="hidden md:inline-block bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded text-xs">
-          Ctrl+K
-        </kbd>
       </motion.button>
 
       <AnimatePresence>
@@ -84,9 +77,8 @@ const SearchBar = ({ onSearch, placeholder = "Search projects..." }) => {
                   </button>
                 </div>
                 
-                <div className="flex justify-between items-center mt-4 text-sm text-gray-500">
-                  <span>Press Enter to search</span>
-                  <span>ESC to close</span>
+                <div className="flex justify-center items-center mt-4 text-sm text-gray-500">
+                  <span>Press Enter to search or ESC to close</span>
                 </div>
               </form>
             </motion.div>
