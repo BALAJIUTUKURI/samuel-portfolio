@@ -1,7 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { adminAPI } from '../utils/api';
 
 const About = () => {
+  const [adminProfile, setAdminProfile] = useState(null);
+  const [profileImage, setProfileImage] = useState(null);
+  const [resumeUrl, setResumeUrl] = useState(null);
+
+  useEffect(() => {
+    fetchAdminProfile();
+  }, []);
+
+  const fetchAdminProfile = async () => {
+    try {
+      const response = await adminAPI.getProfile();
+      setAdminProfile(response.data.admin);
+      if (response.data.admin?.profilePicture) {
+        setProfileImage(`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}${response.data.admin.profilePicture}?t=${Date.now()}`);
+      }
+      if (response.data.admin?.resume) {
+        setResumeUrl(`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}${response.data.admin.resume}`);
+      }
+    } catch (error) {
+      console.error('Error fetching admin profile:', error);
+    }
+  };
+
   const skills = [
     'Photoshop', 'Illustrator', 'InDesign', 'Premier Pro', 
     'After Effects', 'Adobe XD', 'PowerPoint'
@@ -30,7 +54,23 @@ const About = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
+            className="text-center md:text-left"
           >
+            {profileImage && (
+              <motion.div
+                className="mb-6 flex justify-center md:justify-start"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <img
+                  src={profileImage}
+                  alt="Samuel Paul"
+                  className="w-32 h-32 rounded-full object-cover shadow-lg border-4 border-accent/20"
+                />
+              </motion.div>
+            )}
             <h3 className="text-2xl font-bold text-primary dark:text-white mb-6">My Journey</h3>
             <p className="text-gray-600 dark:text-gray-300 mb-6">
               With years of experience in graphic design, I specialize in creating visual identities 
@@ -41,6 +81,19 @@ const About = () => {
               My approach combines artistic vision with practical solutions, ensuring that every 
               design not only looks great but also serves its intended purpose effectively.
             </p>
+            
+            {resumeUrl && (
+              <motion.a
+                href={resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center bg-accent text-white px-6 py-3 rounded-lg hover:bg-accent/90 transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                📄 Download Resume
+              </motion.a>
+            )}
           </motion.div>
 
           <motion.div

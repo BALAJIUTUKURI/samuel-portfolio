@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { FaPlus, FaTrash, FaSignOutAlt } from 'react-icons/fa';
+import { FaPlus, FaTrash, FaSignOutAlt, FaUser, FaFileAlt } from 'react-icons/fa';
 import { projectsAPI } from '../utils/api';
+import axios from 'axios';
 
 const AdminDashboard = () => {
   const [projects, setProjects] = useState([]);
@@ -16,6 +17,10 @@ const AdminDashboard = () => {
   });
   const [mediaFile, setMediaFile] = useState(null);
   const [thumbnailFile, setThumbnailFile] = useState(null);
+  const [showProfileModal, setShowProfileModal] = useState(false);
+  const [showResumeModal, setShowResumeModal] = useState(false);
+  const [profileFile, setProfileFile] = useState(null);
+  const [resumeFile, setResumeFile] = useState(null);
   const navigate = useNavigate();
 
   const categories = ['Branding', 'Digital Campaigns', 'Social Media', 'Print Design', 'Photography', 'Video Editing'];
@@ -90,6 +95,54 @@ const AdminDashboard = () => {
     navigate('/admin/login');
   };
 
+  const handleProfileUpload = async (e) => {
+    e.preventDefault();
+    if (!profileFile) return;
+
+    const formData = new FormData();
+    formData.append('profilePicture', profileFile);
+
+    try {
+      const token = localStorage.getItem('adminToken');
+      await axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/admin/upload-profile`, formData, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      setShowProfileModal(false);
+      setProfileFile(null);
+      alert('Profile picture updated successfully!');
+    } catch (error) {
+      console.error('Error uploading profile:', error);
+      alert('Failed to upload profile picture');
+    }
+  };
+
+  const handleResumeUpload = async (e) => {
+    e.preventDefault();
+    if (!resumeFile) return;
+
+    const formData = new FormData();
+    formData.append('resume', resumeFile);
+
+    try {
+      const token = localStorage.getItem('adminToken');
+      await axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/admin/upload-resume`, formData, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      setShowResumeModal(false);
+      setResumeFile(null);
+      alert('Resume updated successfully!');
+    } catch (error) {
+      console.error('Error uploading resume:', error);
+      alert('Failed to upload resume');
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -105,15 +158,35 @@ const AdminDashboard = () => {
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <h1 className="text-2xl font-bold text-primary">Admin Dashboard</h1>
           <div className="flex items-center space-x-4">
-            <motion.button
-              onClick={() => setShowAddForm(true)}
-              className="bg-accent text-white px-4 py-2 rounded-lg flex items-center space-x-2"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <FaPlus />
-              <span>Add Project</span>
-            </motion.button>
+            <div className="flex items-center space-x-2">
+              <motion.button
+                onClick={() => setShowProfileModal(true)}
+                className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <FaUser />
+                <span>Profile</span>
+              </motion.button>
+              <motion.button
+                onClick={() => setShowResumeModal(true)}
+                className="bg-green-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <FaFileAlt />
+                <span>Resume</span>
+              </motion.button>
+              <motion.button
+                onClick={() => setShowAddForm(true)}
+                className="bg-accent text-white px-4 py-2 rounded-lg flex items-center space-x-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <FaPlus />
+                <span>Add Project</span>
+              </motion.button>
+            </div>
             <motion.button
               onClick={handleLogout}
               className="bg-gray-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
@@ -290,6 +363,92 @@ const AdminDashboard = () => {
                   <button
                     type="button"
                     onClick={() => setShowAddForm(false)}
+                    className="flex-1 bg-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-400"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+          </motion.div>
+        </div>
+      )}
+
+      {/* Profile Upload Modal */}
+      {showProfileModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <motion.div
+            className="bg-white rounded-lg max-w-md w-full"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+          >
+            <div className="p-6">
+              <h2 className="text-2xl font-bold mb-4">Upload Profile Picture</h2>
+              <form onSubmit={handleProfileUpload} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium mb-2">Profile Picture</label>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => setProfileFile(e.target.files[0])}
+                    required
+                    className="w-full px-3 py-2 border rounded-lg"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">Max size: 5MB</p>
+                </div>
+                <div className="flex space-x-4 pt-4">
+                  <button
+                    type="submit"
+                    className="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
+                  >
+                    Upload
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setShowProfileModal(false)}
+                    className="flex-1 bg-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-400"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+          </motion.div>
+        </div>
+      )}
+
+      {/* Resume Upload Modal */}
+      {showResumeModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <motion.div
+            className="bg-white rounded-lg max-w-md w-full"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+          >
+            <div className="p-6">
+              <h2 className="text-2xl font-bold mb-4">Upload Resume</h2>
+              <form onSubmit={handleResumeUpload} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium mb-2">Resume (PDF)</label>
+                  <input
+                    type="file"
+                    accept=".pdf"
+                    onChange={(e) => setResumeFile(e.target.files[0])}
+                    required
+                    className="w-full px-3 py-2 border rounded-lg"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">Max size: 10MB, PDF only</p>
+                </div>
+                <div className="flex space-x-4 pt-4">
+                  <button
+                    type="submit"
+                    className="flex-1 bg-green-600 text-white py-2 rounded-lg hover:bg-green-700"
+                  >
+                    Upload
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setShowResumeModal(false)}
                     className="flex-1 bg-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-400"
                   >
                     Cancel
